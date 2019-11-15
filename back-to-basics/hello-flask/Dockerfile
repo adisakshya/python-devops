@@ -1,6 +1,6 @@
 # Dockerfile
 
-FROM ubuntu:16.04 AS base
+FROM ubuntu:latest AS base
 
 RUN apt-get update && apt-get install -y \
     python3 \

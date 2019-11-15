@@ -9,7 +9,7 @@ $ docker build -t hello-flask:latest .
 Run the Docker container using the command shown below.
 
 ```
-$ docker run hello-flask
+$ docker run -d -p 5000:5000 hello-flask
 ```
 
-The application will be accessible at http://localhost:5000
+The application will be accessible at http://**docker-machine-ip**:5000
