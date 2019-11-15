@@ -12,7 +12,7 @@ To run the dockerized application, execute the following command from the termin
 $ docker-compose up
 ```
 
-T## API
+## API
 
 Use POSTMAN to test the HTTP Requests by using URL: http://**docker-machine-ip-address**:5000
 
