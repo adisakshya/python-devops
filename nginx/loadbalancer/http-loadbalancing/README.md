@@ -18,8 +18,6 @@ I wanted Nginx to act as a single entry point to a distributed web application w
 
 ## Instructions for execution
 
-### Running single instance of the application servers behind the reverse proxy
-
 Run the following command
 
 ```
@@ -36,3 +34,7 @@ You can access the application servers on
  - ```http://<docker-machine-ip>```
 
 Refresh your browser and look at the logs of the second app instance (Loadbalancer Flask Application 2). The request was redirected to it. The next request would be redirected again to the first app and etc.
+
+### Choosing a load balancing method
+
+You can find various load-balancing method conf files in ```/load-balancing-methods``` along with descriptions. You can replace the ```/nginx/project.conf``` file with the conf file of the method of your choice.
