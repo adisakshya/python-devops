@@ -1,492 +1,577 @@
 {
 	"info": {
-		"_postman_id": "09d193d0-ed4d-4571-b328-a0f784a73b3a",
+		"_postman_id": "229c719d-5c58-473d-bd5e-95df52a61d30",
 		"name": "Elasticsearch",
-		"description": "This collection cover the CRUD operations and perform search queries against the database.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Single Node",
-			"item": [
-				{
-					"name": "http://192.168.99.100:9200",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://192.168.99.100:9200",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200"
-						},
-						"description": "Verify if the server has started."
-					},
-					"response": []
+			"name": "Check if the server is up and running",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "192.168.99.101:9200",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200"
 				},
-				{
-					"name": "http://192.168.99.100:9200/myindex",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "http://192.168.99.100:9200/myindex",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200",
-							"path": [
-								"myindex"
-							]
-						},
-						"description": "Create an index (equivalent to a database in RDBMS)."
-					},
-					"response": []
+				"description": "check if the server is up and running by browsing http://<domain>:9200, It will return a JSON object, which contains the information about the installed Elasticsearch."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Index",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "192.168.99.101:9200/myindex",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex"
+					]
 				},
-				{
-					"name": "http://192.168.99.100:9200/_cat/indices?",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://192.168.99.100:9200/_cat/indices?",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200",
-							"path": [
-								"_cat",
-								"indices"
-							]
-						},
-						"description": "All the indexes that have been created."
-					},
-					"response": []
+				"description": "This request creates a new index"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all indices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.99.101:9200/_cat/indices",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"indices"
+					]
 				},
-				{
-					"name": "http://192.168.99.100:9200/myindex/mydocument",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"document1\",\n\t\"author\": \"adisakshya chauhan\",\n\t\"year\": \"2020\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://192.168.99.100:9200/myindex/mydocument",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200",
-							"path": [
-								"myindex",
-								"mydocument"
-							]
-						},
-						"description": "Insert document in an index."
-					},
-					"response": []
+				"description": "This request gives all the indices"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a document for the index",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"document1\",\n\t\"author\": \"adisakshya chauhan\",\n\t\"month\": \"March\",\n\t\"year\": \"2020\",\n\t\"score\": \"100\",\n\t\"contact\": \"adisakshya98@gmail.com\",\n\t\"location\": [28.5733056, 77.0122136]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
-				{
-					"name": "http://192.168.99.100:9200/myindex/mydocument",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"document2\",\n\t\"author\": \"adisakshya chauhan\",\n\t\"year\": \"2020\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://192.168.99.100:9200/myindex/mydocument/1",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200",
-							"path": [
-								"myindex",
-								"mydocument",
-								"1"
-							]
-						},
-						"description": "Specify custom ID for the document."
-					},
-					"response": []
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/mydocument",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"mydocument"
+					]
 				},
-				{
-					"name": "http://192.168.99.100:9200/myindex/mydocument",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"document3\",\n\t\"author\": \"adisakshya chauhan\",\n\t\"year\": \"2020\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://192.168.99.100:9200/myindex/mydocument/-1",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200",
-							"path": [
-								"myindex",
-								"mydocument",
-								"-1"
-							]
-						},
-						"description": "Specify custom ID (negative) to the document."
-					},
-					"response": []
+				"description": "The documents are given some IDs which are used in identifying the document."
+			},
+			"response": []
+		},
+		{
+			"name": "Create a document for the index (custom ID)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"document2\",\n\t\"author\": \"adisakshya chauhan\",\n\t\"month\": \"March\",\n\t\"year\": \"2020\",\n\t\"score\": \"95\",\n\t\"contact\": \"adisakshya@outlook.com\",\n\t\"location\": [30.5733056, 80.0122136]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
-				{
-					"name": "http://192.168.99.100:9200/myindex/mydocument",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"document3\",\n\t\"author\": \"adisakshya chauhan\",\n\t\"year\": \"2020\",\n\t\"month\": \"Feburary\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://192.168.99.100:9200/myindex/mydocument/-1",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200",
-							"path": [
-								"myindex",
-								"mydocument",
-								"-1"
-							]
-						},
-						"description": "Update a document."
-					},
-					"response": []
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/mydocument/1234",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"mydocument",
+						"1234"
+					]
 				},
-				{
-					"name": "http://192.168.99.100:9200/myindex/mydocument",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://192.168.99.100:9200/myindex/mydocument/-1",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200",
-							"path": [
-								"myindex",
-								"mydocument",
-								"-1"
-							]
-						},
-						"description": "Delete a document."
-					},
-					"response": []
+				"description": "The documents are given some IDs which are used in identifying the document."
+			},
+			"response": []
+		},
+		{
+			"name": "Update a document for the index",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"document1\",\n\t\"author\": \"adisakshya chauhan\",\n\t\"month\": \"March\",\n\t\"year\": \"2020\",\n\t\"score\": \"99\",\n\t\"contact\": \"adisakshya98@gmail.com\",\n\t\"country\": \"India\",\n\t\"location\": [28.5733056, 77.0122136]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
-				{
-					"name": "http://192.168.99.100:9200/myindex/_search",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://192.168.99.100:9200/myindex/_search",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200",
-							"path": [
-								"myindex",
-								"_search"
-							]
-						},
-						"description": "Execute a search query against the index."
-					},
-					"response": []
-				},
-				{
-					"name": "http://192.168.99.100:9200/myindex/_search",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://192.168.99.100:9200/myindex/_search?q=document1",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200",
-							"path": [
-								"myindex",
-								"_search"
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "document1"
-								}
-							]
-						},
-						"description": "Look for documents that contain the word \"document1\"."
-					},
-					"response": []
-				},
-				{
-					"name": "http://192.168.99.100:9200/myindex/_search",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://192.168.99.100:9200/myindex/_search?q=name:document1",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200",
-							"path": [
-								"myindex",
-								"_search"
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "name:document1"
-								}
-							]
-						},
-						"description": "Look for document with name as \"document1\"."
-					},
-					"response": []
-				},
-				{
-					"name": "http://192.168.99.100:9200/myindex/_search",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"query\": {\n\t\t\"match\": {\n\t\t\t\"name\": \"document2\"\t\n\t\t}\n\t}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://192.168.99.100:9200/myindex/_search",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200",
-							"path": [
-								"myindex",
-								"_search"
-							]
-						},
-						"description": "Look for document named \"document2\" using QueryDSL."
-					},
-					"response": []
-				},
-				{
-					"name": "http://192.168.99.100:9200/myindex/_search",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"query\": {\n\t\t\"multi_match\": {\n\t\t\t\"query\": \"adisakshya\"\n\t\t}\n\t}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://192.168.99.100:9200/myindex/_search",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200",
-							"path": [
-								"myindex",
-								"_search"
-							]
-						},
-						"description": "Look for documents containing word \"adisakshya\", using QueryDSL."
-					},
-					"response": []
-				},
-				{
-					"name": "http://192.168.99.100:9200/myindex/_search",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"query\": {\n\t\t\"multi_match\": {\n\t\t\t\"query\": \"adisakshya\",\n\t\t\t\"fields\": [\"author\"]\n\t\t}\n\t}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://192.168.99.100:9200/myindex/_search",
-							"protocol": "http",
-							"host": [
-								"192",
-								"168",
-								"99",
-								"100"
-							],
-							"port": "9200",
-							"path": [
-								"myindex",
-								"_search"
-							]
-						},
-						"description": "Look for documents containing word \"adisakshya\" in author field, using QueryDSL."
-					},
-					"response": []
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/mydocument",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"mydocument"
+					]
 				}
-			],
-			"description": "Single node configuration",
-			"protocolProfileBehavior": {}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a document for the index",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/mydocument/UEIu-HABGnObPCBXLmDu",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"mydocument",
+						"UEIu-HABGnObPCBXLmDu"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all documents in an index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/_search",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Versoning a document for the index",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"document1\",\n\t\"author\": \"adisakshya chauhan\",\n\t\"month\": \"March\",\n\t\"year\": \"2020\",\n\t\"score\": \"100\",\n\t\"contact\": \"adisakshya98@gmail.com\",\n\t\"location\": [28.5733056, 77.0122136]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/mydocument/1?version=2&version_type=external",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"mydocument",
+						"1"
+					],
+					"query": [
+						{
+							"key": "version",
+							"value": "2"
+						},
+						{
+							"key": "version_type",
+							"value": "external"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a document for the index",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"document1\",\n\t\"author\": \"adisakshya chauhan\",\n\t\"month\": \"March\",\n\t\"year\": \"2020\",\n\t\"score\": \"100\",\n\t\"country\": \"India\",\n\t\"contact\": \"adisakshya98@gmail.com\",\n\t\"location\": [28.5733056, 77.0122136]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/mydocument/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"mydocument",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Force create document for the index",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"document1\",\n\t\"author\": \"adisakshya chauhan\",\n\t\"month\": \"March\",\n\t\"year\": \"2020\",\n\t\"score\": \"100\",\n\t\"country\": \"India\",\n\t\"contact\": \"adisakshya98@gmail.com\",\n\t\"location\": [28.5733056, 77.0122136]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/mydocument/1234?op_type=create",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"mydocument",
+						"1234"
+					],
+					"query": [
+						{
+							"key": "op_type",
+							"value": "create"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get document for the index by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/mydocument/1234",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"mydocument",
+						"1234"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all fields of document for the index by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/mydocument/1234?_source",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"mydocument",
+						"1234"
+					],
+					"query": [
+						{
+							"key": "_source",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get custom fields of document for the index by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/mydocument/1234?_source_includes=author,name,year",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"mydocument",
+						"1234"
+					],
+					"query": [
+						{
+							"key": "_source_includes",
+							"value": "author,name,year"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all indices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.99.101:9200/_all",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"_all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search all documents with query",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.99.101:9200/_all/_search?q=country:India",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"_all",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "country:India"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search all documents with query to match country name",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\": {\n\t\t\"match\": {\n\t\t\t\"country\": \"India\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/_search",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search all documents with query to contain a word",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\": {\n\t\t\"multi_match\": {\n\t\t\t\"query\": \"India\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/_search",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"_search"
+					]
+				},
+				"description": "Look for documents containing word \"India\""
+			},
+			"response": []
+		},
+		{
+			"name": "Search all documents with query to contain a word in a field",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"query\": {\n\t\t\"multi_match\": {\n\t\t\t\"query\": \"India\",\n\t\t\t\"fields\": [\"country\"]\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.99.101:9200/myindex/_search",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"99",
+						"101"
+					],
+					"port": "9200",
+					"path": [
+						"myindex",
+						"_search"
+					]
+				},
+				"description": "Look for documents containing word \"adisakshya\" in author field."
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
