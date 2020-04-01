@@ -132,7 +132,3 @@ class ClearCache(Resource):
 api.add_resource(Cache, '/api/cache')
 api.add_resource(ClearCache, '/api/cache/clear')
 
-if __name__ == "__main__":
-    
-    port = os.environ.get("PORT", 5000)
-    app.run(debug=True, host="localhost", port=port)
